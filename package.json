@@ -1,0 +1,29 @@
+{
+  "name": "fuzzy-wookie",
+  "version": "0.0.0",
+  "description": "Ember CLI Deploy - Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.7.2"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/achambers/fuzzy-wookie"
+  },
+  "keywords": [
+    "node",
+    "ember-cli",
+    "express"
+  ],
+  "author": "Aaron Chambers",
+  "contributors": [
+    "Aaron Chambers <achambers@gmail.com>"
+  ],
+  "license": "MIT"
+}
