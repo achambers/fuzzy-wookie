@@ -12,7 +12,13 @@ app.set('port', (process.env.PORT || 5000));
 app.use(logger(logFormat));
 
 app.get('/', function(request, response) {
-  var client = redis.createClient();
+  var redisUrl   = require("url").parse(process.env.REDISTOGO_URL);
+  var client = require("redis").createClient(redisUrl.port, redisUrl.hostname);
+
+  if(redisUrl.auth){
+    client.auth(redisUrl.auth.split(":")[1]);
+  }
+
   var manifestId = request.query['manifest_id'];
   var key = appName + ':' + fileName + ':';
   var content = null;
