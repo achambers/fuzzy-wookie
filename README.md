@@ -1,3 +1,5 @@
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 #Fuzzy Wookie
 
 This is a basic server designed to serve an index html as a part of an Ember CLI deploy

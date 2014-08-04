@@ -1,0 +1,23 @@
+{
+  "name": "fuzzy-wookie",
+  "description": "A server to host every branch of your ember-cli app",
+  "keywords": [
+    "Lightening Fast Deployment of Your Javascript App",
+    "Ember-CLI"
+  ],
+  "website": "https://github.com/achambers",
+  "repository": "https://github.com/achambers/fuzzy-wookie",
+  "logo": "https://avatars1.githubusercontent.com/u/416724?v=1&s=460",
+  "success_url": "/welcome",
+  "env": {
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "1"
+    }
+  },
+  "addons": [
+    "redistogo",
+    "papertrail",
+    "newrelic:stark"
+  ]
+}
