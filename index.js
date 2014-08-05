@@ -3,8 +3,6 @@ var Q = require('q');
 var logger = require('morgan');
 var express = require('express')
 var app = express();
-var appName = process.env.APP_NAME || 'my-app';
-var fileName = process.env.FILE_NAME || 'index';
 var logFormat = process.env.LOG_FORMAT || 'short';
 var defaultRedisUrl = 'redis://127.0.0.1:6379';
 
@@ -20,15 +18,9 @@ app.get('/', function(request, response) {
     client.auth(redisUrl.auth.split(":")[1]);
   }
 
-  var manifestId = request.query['manifest_id'];
-  var key = appName + ':' + fileName + ':';
+  var manifestId = request.query['manifest-id'] || 'current';
+  var key = 'index:' + manifestId;
   var content = null;
-
-  if (manifestId) {
-    key = key.concat(manifestId);
-  } else {
-    key = key.concat('current');
-  }
 
   client.on('connect', function() {
     console.log('Connected to redis');
