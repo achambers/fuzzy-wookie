@@ -6,13 +6,14 @@ var app = express();
 var appName = process.env.APP_NAME || 'my-app';
 var fileName = process.env.FILE_NAME || 'index';
 var logFormat = process.env.LOG_FORMAT || 'short';
+var defaultRedisUrl = 'redis://127.0.0.1:6379';
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(logger(logFormat));
 
 app.get('/', function(request, response) {
-  var redisUrl   = require("url").parse(process.env.REDISTOGO_URL);
+  var redisUrl   = require("url").parse(process.env.REDISTOGO_URL || defaultRedisUrl);
   var client = require("redis").createClient(redisUrl.port, redisUrl.hostname);
 
   if(redisUrl.auth){
