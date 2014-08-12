@@ -9,7 +9,7 @@ app.use(logger(logFormat));
 
 app.get('/', function(request, response) {
   var redis = require('./lib/redis')();
-  var manifestId = request.query['manifest-id'] || 'current';
+  var manifestId = request.query['key'] || 'current';
   var key = 'index:' + manifestId;
 
   redis.connect()
