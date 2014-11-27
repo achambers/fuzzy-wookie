@@ -7,7 +7,7 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(logger(logFormat));
 
-app.get('/', function(request, response) {
+app.get('/*', function(request, response) {
   var redis = require('./lib/redis')();
   var manifestId = request.query['key'] || 'current';
   var key = 'index:' + manifestId;
