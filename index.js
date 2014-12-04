@@ -1,6 +1,7 @@
-var express = require('express')
-var logger = require('morgan');
-var app = express();
+var RSVP      = require('rsvp');
+var express   = require('express')
+var logger    = require('morgan');
+var app       = express();
 var logFormat = process.env.LOG_FORMAT || 'short';
 
 app.set('port', (process.env.PORT || 5000));
@@ -8,13 +9,20 @@ app.set('port', (process.env.PORT || 5000));
 app.use(logger(logFormat));
 
 app.get('/*', function(request, response) {
-  var redis = require('./lib/redis')();
-  var manifestId = request.query['key'] || 'current';
-  var key = 'index:' + manifestId;
+  var redis   = require('./lib/redis')();
+  var key     = request.query['key'];
+  var appName = process.env.APP_NAME || 'default';
 
   redis.connect()
   .then(function() {
-    return redis.get(key);
+    if (!key) {
+      return redis.get(appName + ':current');
+    }
+
+    return RSVP.resolve(key);
+  })
+  .then(function(key) {
+    return redis.get(appName + ':' + key);
   })
   .then(function(data) {
     if (data) {
